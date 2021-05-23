@@ -13,7 +13,6 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.learning.cursomc.domain.enums.EstadoPagamento;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Inheritance( strategy = InheritanceType.JOINED)
@@ -46,5 +44,12 @@ public abstract class Pagamento implements Serializable {
 	
 	public void setEstado(EstadoPagamento estado) {
 		this.estado = estado.getCod();
+	}
+
+	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
+		super();
+		this.id = id;
+		this.estado = (estado == null) ? null : estado.getCod();
+		this.pedido = pedido;
 	}
 }

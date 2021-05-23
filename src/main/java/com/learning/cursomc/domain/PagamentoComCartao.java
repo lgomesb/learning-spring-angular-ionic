@@ -21,7 +21,8 @@ public class PagamentoComCartao extends Pagamento implements Serializable {
 	private Integer numeroDeParcelas;
 
 	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
-		super(id, estado.getCod(), pedido);
+		
+		super(id,estado, pedido);
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
 	
