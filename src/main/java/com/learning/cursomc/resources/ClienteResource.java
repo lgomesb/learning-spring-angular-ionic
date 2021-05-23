@@ -23,7 +23,7 @@ public class ClienteResource {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> find(@PathVariable Integer id) throws Exception {
 		
-		Cliente cliente = service.buscar(id);
+		Cliente cliente = service.find(id);
 		return ResponseEntity.ok().body(cliente);
 		
 	}

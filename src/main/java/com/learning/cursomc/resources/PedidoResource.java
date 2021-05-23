@@ -23,7 +23,7 @@ public class PedidoResource {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> find(@PathVariable Integer id) throws Exception {
 		
-		Pedido categoria = service.buscar(id);
+		Pedido categoria = service.find(id);
 		return ResponseEntity.ok().body(categoria);
 		
 	}
