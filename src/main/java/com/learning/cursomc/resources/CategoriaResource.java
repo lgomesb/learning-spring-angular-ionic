@@ -1,6 +1,8 @@
 package com.learning.cursomc.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.learning.cursomc.domain.Categoria;
+import com.learning.cursomc.dto.CategoriaDTO;
 import com.learning.cursomc.services.CategoriaService;
 
 @RestController
@@ -26,9 +29,20 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	@GetMapping
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public ResponseEntity<List<CategoriaDTO>> findAll() throws Exception {
+		
+		List<Categoria> categorias = service.findAll();		
+		List<CategoriaDTO> categoriasDTO = categorias.stream().map(c -> new CategoriaDTO(c)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(categoriasDTO);
+		
+	}
+	
 	@GetMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<?> find(@PathVariable Integer id) throws Exception {
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) throws Exception {
 		
 		Categoria categoria = service.find(id);
 		return ResponseEntity.ok().body(categoria);
