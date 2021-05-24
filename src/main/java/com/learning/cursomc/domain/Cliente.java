@@ -37,7 +37,7 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String name;
 	private String email;
-	private String cprOuCnpf;
+	private String cpfOuCnpf;
 	private Integer tipo;
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
@@ -55,7 +55,7 @@ public class Cliente implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.cprOuCnpf = cprOuCnpf;
+		this.cpfOuCnpf = cprOuCnpf;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	} 
 	

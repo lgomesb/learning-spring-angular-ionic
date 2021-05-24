@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.learning.cursomc.services.validation.ClienteInsert;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +29,9 @@ public class ClienteNewDTO implements Serializable {
 	@NotEmpty(message = "Preenchimento obrigatório")
 	@Email(message = "Email inválido")
 	private String email;	
-	private String cprOuCnpf;
+
+	
+	private String cpfOrCnpj;
 	private Integer tipo;
 
 	private String logradouro;
