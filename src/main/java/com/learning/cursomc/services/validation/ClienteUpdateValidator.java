@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.learning.cursomc.domain.Cliente;
-import com.learning.cursomc.domain.enums.TipoCliente;
 import com.learning.cursomc.dto.ClienteDTO;
-import com.learning.cursomc.dto.ClienteNewDTO;
 import com.learning.cursomc.repositories.ClienteRepository;
 import com.learning.cursomc.resources.exception.FieldMessage;
 
