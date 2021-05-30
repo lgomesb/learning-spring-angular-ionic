@@ -15,9 +15,15 @@
 	<packaging>jar</packaging>
 	<name>cursomc</name>
 	<description>Learning Spring Boot with Angular and Ionic</description>
+
 	<properties>
-		<java.version>11</java.version>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- <java.version>11</java.version> -->
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
