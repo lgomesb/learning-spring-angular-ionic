@@ -12,7 +12,7 @@
 	<groupId>com.learning</groupId>
 	<artifactId>cursomc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>cursomc</name>
 	<description>Learning Spring Boot with Angular and Ionic</description>
 	<properties>
