@@ -11,10 +11,14 @@ public abstract class AbstractEmailService implements EmailService {
 
 	@Value("${default.sender}")
 	private String sender;
+	
+	@Value("${spring.mail.username}")
+	private String login;
 
 	@Override
 	public void sendOrderConfirmationEmail(Pedido obj) {
 		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
+		System.out.println("LOGIN_EMAIL: " + login);
 		sendEmail(sm);
 	}
 
