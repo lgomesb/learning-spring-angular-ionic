@@ -92,7 +92,7 @@ public class ClienteService {
 	public Cliente fromDTO(ClienteNewDTO dto) {
 
 		Cliente cliente = new Cliente(null, dto.getName(), dto.getEmail(), dto.getCpfOrCnpj(),
-				TipoCliente.toEnum(dto.getTipo()), pe.encode(dto.getSenha()));
+				TipoCliente.toEnum(dto.getTipo()), pe.encode(dto.getSenha()) );
 		Endereco endereco = new Endereco(null, dto.getLogradouro(), dto.getNumero(), dto.getComplemento(),
 				dto.getBairro(), dto.getCep(), cliente, new Cidade(dto.getCidadeId(), null, null));
 		
