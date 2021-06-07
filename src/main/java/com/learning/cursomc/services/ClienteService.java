@@ -1,5 +1,6 @@
 package com.learning.cursomc.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.learning.cursomc.domain.Cidade;
 import com.learning.cursomc.domain.Cliente;
@@ -37,6 +39,9 @@ public class ClienteService {
 
 	@Autowired
 	private BCryptPasswordEncoder pe;
+	
+	@Autowired
+	private S3Service s3Service;
 
 	public Cliente find(Integer id) throws Exception {
 
@@ -108,6 +113,10 @@ public class ClienteService {
 	private void updateData(Cliente newCliente, Cliente cliente) {
 		newCliente.setName(cliente.getName());
 		newCliente.setEmail(cliente.getEmail());
+	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) throws Exception {
+		return s3Service.uploadFile(multipartFile);
 	}
 
 }
