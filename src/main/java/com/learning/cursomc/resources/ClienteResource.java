@@ -72,6 +72,15 @@ public class ClienteResource {
 		
 	}
 	
+	@GetMapping(value = "/email")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public ResponseEntity<Cliente> findByEmail(@RequestParam(value="value") String email) throws Exception {
+		
+		Cliente cliente = service.findByEmail(email);
+		return ResponseEntity.ok().body(cliente);
+		
+	}
+	
 	@PostMapping
 	public ResponseEntity<Void> insert( @Valid @RequestBody ClienteNewDTO dto) {
 		

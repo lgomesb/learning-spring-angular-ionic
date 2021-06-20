@@ -41,20 +41,19 @@ public class ClienteService {
 
 	@Autowired
 	private BCryptPasswordEncoder pe;
-	
+
 	@Autowired
 	private S3Service s3Service;
-	
+
 	@Autowired
 	private ImageService imageService;
 
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
-	
+
 	@Value("${img.profile.size}")
 	private Integer size;
-	
-	
+
 	public Cliente find(Integer id) throws Exception {
 
 		UserSecurity user = UserService.authenticated();
@@ -94,6 +93,18 @@ public class ClienteService {
 		return repository.findAll();
 	}
 
+	public Cliente findByEmail(String email) throws Exception {
+		UserSecurity user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
+		Cliente cliente = repository.findByEmail(email).orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Email: " + email + ", Tipo: " + Cliente.class.getName()));
+
+		return cliente;
+	}
+
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repository.findAll(pageRequest);
@@ -126,20 +137,20 @@ public class ClienteService {
 		newCliente.setName(cliente.getName());
 		newCliente.setEmail(cliente.getEmail());
 	}
-	
+
 	public URI uploadProfilePicture(MultipartFile multipartFile) throws Exception {
-		
+
 		UserSecurity user = UserService.authenticated();
-		if( user == null) {
+		if (user == null) {
 			throw new AuthorizationException("Acesso negado");
 		}
 
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
-		
+
 		String fileName = prefix + user.getId() + ".jpg";
-		
+
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}
 
